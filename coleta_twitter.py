@@ -1,28 +1,47 @@
 #pip3 install oauth2
 import oauth2
 import json
+from dateutil import parser
+from datetime import datetime
+
+def format_date(obj_datetime):
+	print(obj_datetime)
+	return obj_datetime.strftime("%Y-%m-%d")
+
+def get_requisicao(cliente, max_id,termo):
+	requisicao = cliente.request('https://api.twitter.com/1.1/search/tweets.json?q={termo}&result_type=recent&lang=pt-br&count=3&{max_id}'.format(max_id=max_id,termo=termo))
+	decodificar = requisicao[1].decode()
+	objeto = json.loads(decodificar)
+	return objeto['statuses']
+
+def coleta(api_key, api_secret_key, token_key, token_secret_key, termo, num_tweets):
+	consumer = oauth2.Consumer(api_key, api_secret_key)
+	token = oauth2.Token(token_key, token_secret_key)
+	cliente = oauth2.Client(consumer, token)
+	strUrl = ""
+	max_id = ""
+	num_tweets_collected = 0
+
+	#coleta os tweets
+	while(num_tweets_collected < num_tweets):
+
+		tweets = get_requisicao(cliente, max_id, termo)
+
+		#printa dados filtrados do JSON
+		for tweet in tweets:
+			print(tweet['user']['screen_name'])
+			print(tweet['created_at'])
+			print(tweet['text'])
+			print()
+			max_id = "max_id={max_id}&".format(max_id=tweet['id'])
+			num_tweets_collected += 1
 
 #inicializa keys
 api_key = 'suaAPIKey'
-api_secret_key = 'suaAPISecreyKey'
-
+api_secret_key = 'suaAPISecretKey'
 token_key = 'suaTokenKey'
 token_secret_key = 'suaTokenSecretKey'
+termo = 'seuTermo'
+num_tweets = 10
 
-consumer = oauth2.Consumer(api_key, api_secret_key)
-token = oauth2.Token(token_key, token_secret_key)
-cliente = oauth2.Client(consumer, token)
-
-#coleta os dados
-requisicao = cliente.request('https://api.twitter.com/1.1/search/tweets.json?q=brasil&result_type=popular')
-decodificar = requisicao[1].decode()
-
-objeto = json.loads(decodificar)
-twittes = objeto['statuses']
-
-#printa dados completos
-for twit in twittes:
-    print(twit['user']['screen_name'])
-    print(twit['text'])
-    print()
-
+coleta(api_key, api_secret_key, token_key, token_secret_key, termo, num_tweets)
