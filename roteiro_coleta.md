@@ -7,9 +7,9 @@ CONSEGUINDO SUAS CHAVES DE ACESSO
 3. Ao criar as configurações do app, clicar em 'gerar token'
 4. Você agora tem suas chaves de acesso :)
 
-FAZENDO O CÓDIGO DE COLETA
+FAZENDO O CÓDIGO DE COLETA (coleta_iterativa.py)
 1. Importe as bibliotecas JSON e OAuth2 para o seu projeto .py
-2. Inicialize suas chaves como variáveis
+2. Inicialize suas chaves como variáveis 
 3. Inicialize as variáveis consumer e token da biblioteca oauth usando suas chaves
 4. Inicialize seu cliente a partir das variáveis inicializadas pelo oauth
 5. Crie uma requisição na URL de coleta da API, adicionando como query a palavra que deseja pesquisar
