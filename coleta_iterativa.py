@@ -8,8 +8,8 @@ def format_date(obj_datetime):
 	print(obj_datetime)
 	return obj_datetime.strftime("%Y-%m-%d")
 
-def get_requisicao(cliente, max_id,termo):
-	requisicao = cliente.request('https://api.twitter.com/1.1/search/tweets.json?q={termo}&tweet_mode=extended&result_type=recent&lang=pt-br&count=3&{max_id}'.format(max_id=max_id,termo=termo))
+def get_requisicao(cliente, max_id, termo):
+	requisicao = cliente.request('https://api.twitter.com/1.1/search/tweets.json?q={termo}&tweet_mode=extended&result_type=recent&lang=pt-br&{max_id}'.format(max_id=max_id,termo=termo))
 	decodificar = requisicao[1].decode()
 	objeto = json.loads(decodificar)
 	return objeto['statuses']
@@ -42,6 +42,6 @@ api_secret_key = 'suaAPISecretKey'
 token_key = 'suaTokenKey'
 token_secret_key = 'suaTokenSecretKey'
 termo = 'seuTermo'
-num_tweets = 10
+num_tweets = numIteracoes
 
 coleta(api_key, api_secret_key, token_key, token_secret_key, termo, num_tweets)
