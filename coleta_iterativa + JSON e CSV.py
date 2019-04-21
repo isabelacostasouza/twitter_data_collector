@@ -69,7 +69,7 @@ api_secret_key = 'kaLLbccEyOSQ76GSxNGey1vcl2eZB0enstIzNDr1HbhB2ASGmI'
 token_key = '1115390331112108033-T2u84Yrhw8zYTTTkBWDxiYuadmXrUH'
 token_secret_key = 'QnD1Nnc5dpZ5lNylndJ0ktuSMT2GU4s0JczOBl6bWScko'
 termo = 'sadia'
-num_tweets = 500
+num_tweets = 100
 arquivo_com_tweetes_coletados = 'tweets_coletados.json'
 
 coleta(api_key, api_secret_key, token_key, token_secret_key, termo, num_tweets, arquivo_com_tweetes_coletados)
